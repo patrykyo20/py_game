@@ -1,8 +1,6 @@
-# Window settings
 WINDOW_WIDTH = 1280
 WINDOW_HEIGHT = 720
 
-# Colors
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 RED = (255, 0, 0)
@@ -17,13 +15,11 @@ SILVER = (192, 192, 192)
 DARK_GREEN = (0, 100, 0)
 YELLOW = (255, 255, 0)
 
-# Status effect colors
 POISON_COLOR = (0, 255, 0)
 BURN_COLOR = (255, 69, 0)
 BLESS_COLOR = (255, 215, 0)
 STEALTH_COLOR = (128, 128, 128)
 
-# Character base stats
 CHARACTER_STATS = {
     'Warrior': {'health': 120, 'attack': 15, 'defense': 10},
     'Mage': {'health': 80, 'attack': 20, 'defense': 5},

@@ -21,8 +21,7 @@ class LevelSystem:
         self.level += 1
         self.xp -= self.xp_to_next_level
         self.xp_to_next_level = int(self.xp_to_next_level * 1.5)
-        self.level_up_animation = 60  # 1 second at 60 FPS
-        # Add level up particles
+        self.level_up_animation = 60
         for _ in range(30):
             angle = random.uniform(0, 2 * math.pi)
             speed = random.uniform(2, 5)
@@ -37,7 +36,6 @@ class LevelSystem:
     def update(self):
         if self.level_up_animation > 0:
             self.level_up_animation -= 1
-            # Update particles
             for particle in self.level_up_particles[:]:
                 particle['pos'][0] += particle['vel'][0]
                 particle['pos'][1] += particle['vel'][1]
@@ -46,32 +44,25 @@ class LevelSystem:
                     self.level_up_particles.remove(particle)
 
     def draw(self, screen, x, y):
-        # Draw XP bar
         bar_width = 200
         bar_height = 20
         xp_percent = self.xp / self.xp_to_next_level
         
-        # Draw XP bar background
         pygame.draw.rect(screen, (50, 50, 50), (x, y, bar_width, bar_height), border_radius=10)
-        # Draw XP bar fill
         if xp_percent > 0:
             fill_width = int(bar_width * xp_percent)
             pygame.draw.rect(screen, YELLOW, (x, y, fill_width, bar_height), border_radius=10)
-        # Draw XP bar border
         pygame.draw.rect(screen, WHITE, (x, y, bar_width, bar_height), 2, border_radius=10)
         
-        # Draw level text
         level_text = f"Level {self.level}"
         font = pygame.font.Font(None, 24)
         text_surface = font.render(level_text, True, WHITE)
         screen.blit(text_surface, (x + bar_width + 10, y))
         
-        # Draw XP text
         xp_text = f"XP: {self.xp}/{self.xp_to_next_level}"
         text_surface = font.render(xp_text, True, WHITE)
         screen.blit(text_surface, (x, y - 25))
         
-        # Draw level up particles
         if self.level_up_animation > 0:
             for particle in self.level_up_particles:
                 alpha = int((particle['lifetime'] / particle['max_lifetime']) * 255)

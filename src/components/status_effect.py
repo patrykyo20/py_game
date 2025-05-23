@@ -14,7 +14,6 @@ class StatusEffect:
 
     def update(self):
         self.duration -= 1
-        # Update particles
         for particle in self.particles[:]:
             particle['lifetime'] -= 1
             if particle['lifetime'] <= 0:

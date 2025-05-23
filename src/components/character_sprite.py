@@ -28,72 +28,47 @@ class CharacterSprite:
             self.draw_rogue()
         elif self.type == "Paladin":
             self.draw_paladin()
-        else:  # Enemy
+        else: 
             self.draw_enemy()
 
     def draw_warrior(self):
-        # Body
         pygame.draw.rect(self.sprite, (100, 100, 100), (40, 30, 20, 60))
-        # Head
         pygame.draw.circle(self.sprite, (255, 200, 150), (50, 20), 15)
-        # Sword
         pygame.draw.rect(self.sprite, (200, 200, 200), (60, 40, 30, 5))
         pygame.draw.rect(self.sprite, (150, 150, 150), (85, 35, 5, 15))
-        # Shield
         pygame.draw.rect(self.sprite, (150, 100, 50), (30, 40, 10, 30))
 
     def draw_mage(self):
-        # Body
         pygame.draw.rect(self.sprite, (100, 50, 150), (40, 30, 20, 60))
-        # Head
         pygame.draw.circle(self.sprite, (255, 200, 150), (50, 20), 15)
-        # Staff
         pygame.draw.rect(self.sprite, (150, 100, 50), (60, 30, 5, 60))
-        # Magic orb
         pygame.draw.circle(self.sprite, (255, 255, 0), (65, 30), 8)
 
     def draw_archer(self):
-        # Body
         pygame.draw.rect(self.sprite, (50, 100, 50), (40, 30, 20, 60))
-        # Head
         pygame.draw.circle(self.sprite, (255, 200, 150), (50, 20), 15)
-        # Bow
         pygame.draw.arc(self.sprite, (150, 100, 50), (60, 40, 30, 30), 0, math.pi, 3)
-        # Arrow
         pygame.draw.line(self.sprite, (200, 200, 200), (70, 55), (90, 55), 2)
 
     def draw_rogue(self):
-        # Body
         pygame.draw.rect(self.sprite, (50, 50, 50), (40, 30, 20, 60))
-        # Head
         pygame.draw.circle(self.sprite, (255, 200, 150), (50, 20), 15)
-        # Hood
         pygame.draw.arc(self.sprite, (30, 30, 30), (35, 10, 30, 30), 0, math.pi, 3)
-        # Daggers
         pygame.draw.line(self.sprite, (200, 200, 200), (30, 50), (20, 40), 3)
         pygame.draw.line(self.sprite, (200, 200, 200), (70, 50), (80, 40), 3)
 
     def draw_paladin(self):
-        # Body
         pygame.draw.rect(self.sprite, (200, 200, 255), (40, 30, 20, 60))
-        # Head
         pygame.draw.circle(self.sprite, (255, 200, 150), (50, 20), 15)
-        # Helmet
         pygame.draw.arc(self.sprite, (200, 200, 200), (35, 15, 30, 20), 0, math.pi, 3)
-        # Shield
         pygame.draw.rect(self.sprite, (255, 255, 200), (30, 40, 10, 30))
-        # Holy symbol
         pygame.draw.circle(self.sprite, (255, 255, 0), (35, 55), 5)
 
     def draw_enemy(self):
-        # Body
         pygame.draw.rect(self.sprite, (150, 0, 0), (40, 30, 20, 60))
-        # Head
         pygame.draw.circle(self.sprite, (100, 0, 0), (50, 20), 15)
-        # Eyes
         pygame.draw.circle(self.sprite, (255, 0, 0), (45, 18), 3)
         pygame.draw.circle(self.sprite, (255, 0, 0), (55, 18), 3)
-        # Claws
         pygame.draw.line(self.sprite, (200, 200, 200), (30, 50), (20, 40), 3)
         pygame.draw.line(self.sprite, (200, 200, 200), (70, 50), (80, 40), 3)
 

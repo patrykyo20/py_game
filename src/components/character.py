@@ -1,5 +1,7 @@
 import random
 import math
+
+import pygame
 from src.components.character_sprite import CharacterSprite
 from src.components.level_system import LevelSystem
 from src.components.status_effect import StatusEffect
@@ -22,10 +24,9 @@ class Character:
         self.crit_chance = 0.1
         self.dodge_chance = 0.05
         self.level_system = LevelSystem()
-        self.base_stats = stats.copy()  # Store base stats for level scaling
+        self.base_stats = stats.copy()
 
     def level_up_stats(self):
-        # Increase stats based on character class
         if self.name == "Warrior":
             self.max_health += 15
             self.attack += 2
@@ -48,7 +49,6 @@ class Character:
             self.attack += 1
             self.defense += 2
         
-        # Heal to full on level up
         self.health = self.max_health
         return True
 
@@ -78,7 +78,6 @@ class Character:
         self.draw_particles(screen)
         for effect in self.effects:
             effect.draw_particles(screen, self.sprite.position)
-        # Draw level system
         self.level_system.draw(screen, self.sprite.position[0], self.sprite.position[1] - 50)
 
     def add_particle(self, pos, color, velocity, lifetime):
@@ -106,11 +105,9 @@ class Character:
             pygame.draw.circle(screen, color, pos, 2)
 
     def take_damage(self, damage):
-        # Check for dodge
         if random.random() < self.dodge_chance:
             return 0, "DODGE!"
 
-        # Check for critical hit
         is_crit = random.random() < self.crit_chance
         if is_crit:
             damage *= 1.5
@@ -119,7 +116,6 @@ class Character:
         self.health = max(0, self.health - actual_damage)
         self.sprite.flash()
         
-        # Add damage particles
         for _ in range(10):
             angle = random.uniform(0, 2 * math.pi)
             speed = random.uniform(2, 5)
@@ -133,7 +129,6 @@ class Character:
 
     def heal(self, amount):
         self.health = min(self.max_health, self.health + amount)
-        # Add heal particles
         for _ in range(10):
             angle = random.uniform(0, 2 * math.pi)
             speed = random.uniform(1, 3)
@@ -160,7 +155,6 @@ class Character:
         if self.name == "Warrior":
             damage = self.attack * 2
             actual_damage, message = target.take_damage(damage)
-            # Add berserker rage particles
             for _ in range(20):
                 angle = random.uniform(0, 2 * math.pi)
                 speed = random.uniform(3, 6)
@@ -175,7 +169,6 @@ class Character:
         elif self.name == "Mage":
             damage = self.attack * 1.5
             actual_damage, message = target.take_damage(damage)
-            # Add fireball particles
             for _ in range(20):
                 angle = random.uniform(0, 2 * math.pi)
                 speed = random.uniform(3, 6)
@@ -194,7 +187,6 @@ class Character:
         elif self.name == "Archer":
             damage = self.attack * 2.5
             actual_damage, message = target.take_damage(damage)
-            # Add arrow particles
             for _ in range(20):
                 angle = random.uniform(-0.2, 0.2)
                 speed = random.uniform(5, 8)
@@ -209,8 +201,7 @@ class Character:
         elif self.name == "Rogue":
             self.stealth = True
             self.stealth_timer = 2
-            self.crit_chance = 0.5  # 50% crit chance while stealthed
-            # Add stealth particles
+            self.crit_chance = 0.5
             for _ in range(20):
                 angle = random.uniform(0, 2 * math.pi)
                 speed = random.uniform(1, 3)
@@ -225,7 +216,6 @@ class Character:
         elif self.name == "Paladin":
             heal_amount = self.attack * 1.5
             self.heal(heal_amount)
-            # Add holy light particles
             for _ in range(20):
                 angle = random.uniform(0, 2 * math.pi)
                 speed = random.uniform(2, 4)
